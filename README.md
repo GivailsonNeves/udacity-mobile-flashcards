@@ -4,7 +4,7 @@ A project to finalize the last module of the Udacity's React course. This projec
 
 ## Tecnologies
 
-This project is created using React Native, Redux and a Expo. After you installed the basic dependencies you can test your project over Expo or just using React's CLI comands.
+This project was created using React Native, Redux and a Expo. After you installed the basic dependencies you can test your project over Expo or just using React's CLI comands.
 
 ### expo
 
