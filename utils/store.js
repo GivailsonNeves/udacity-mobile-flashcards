@@ -10,7 +10,7 @@ const configureStore = () => {
         if (!decks) {
             AsyncStorage.setItem('decks', '{}')
         } else {
-            store.setItem('decks', JSON.parse(decks));
+            //store.setItem('decks', JSON.parse(decks));
         }
     });
 
@@ -18,7 +18,7 @@ const configureStore = () => {
         if (!questions) {
             AsyncStorage.setItem('questions', '{}')
         } else {
-            store.setItem('questions', JSON.parse(questions));
+            //store.setItem('questions', JSON.parse(questions));
         }
     });
 

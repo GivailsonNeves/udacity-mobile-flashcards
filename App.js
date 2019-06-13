@@ -1,7 +1,6 @@
 import React from 'react';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import { View, StatusBar } from 'react-native';
-import { createStore } from 'redux';
 import Constants from 'expo-constants';
 import { Provider } from 'react-redux'
 import { purple } from './utils/colors';
