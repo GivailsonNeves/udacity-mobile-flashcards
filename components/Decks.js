@@ -1,8 +1,16 @@
 import React, {Component} from 'react';
-import { View, FlatList, Text } from 'react-native';
+import { View } from 'react-native';
 import NoDataItem from './NoDataItem';
 import DeckItem from './DeckItem';
 import { withNavigation } from 'react-navigation';
+import style from 'styled-components';
+import { connect } from 'react-redux';
+
+
+const DeckListView = style.FlatList`
+    padding: 15px; 
+    padding-bottom: 40px;   
+`;
 
 class Decks extends Component {
 
@@ -17,36 +25,28 @@ class Decks extends Component {
 
     render () {
 
-        //  const { listDecks } = props;
-        const listDecks = [
-            { name: 'item 1'},
-            { name: 'item 2'},
-            { name: 'item 3'},
-            { name: 'item 4'},
-            { name: 'item 5'},
-            { name: 'item 6'},
-            { name: 'item 1'},
-            { name: 'item 2'},
-            { name: 'item 3'},
-            { name: 'item 4'},
-            { name: 'item 5'},
-            { name: 'item 6'},
-        ];
+        const { decks } = this.props;
+        const decksIds = Object.keys(decks);
+        const decksList = !!decksIds.length ? decksIds.map(i => decks[i]).sort( (a, b) => b - a ) : [];
 
         return (
             <View>
                 {
-                    listDecks 
-                    ? <FlatList
-                        data={listDecks}
-                        renderItem={item => <DeckItem pressItem={this.handleItemPress} {...item} />}
-                        keyExtractor={(_item, index) => index.toString()}
-                      />
-                    : <NoDataItem message="No decks founded!" />
+                    (!!decksList.length)
+                        ? <DeckListView
+                            data={decksList}
+                            renderItem={item => <DeckItem pressItem={this.handleItemPress} {...item} />}
+                            keyExtractor={(_item, index) => index.toString()}
+                          />
+                        : <NoDataItem message="No decks founded!" />
                 }
             </View>
         )
     }
 }
 
-export default withNavigation(Decks);
+const mapStateToProps = ({ decks }) => ({    
+    decks
+});
+
+export default connect(mapStateToProps)(withNavigation(Decks));
