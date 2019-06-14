@@ -1,19 +1,15 @@
-import { CREATE_DECK } from "../actions/decks";
-import { getTime } from "../utils/helpers";
+import { CREATE_DECK, RECEIVE_DECKS } from "../actions/decks";
 
 const decks = (state = {}, action) => {
-    switch(action.type) {
-        case CREATE_DECK: 
-            const time = getTime();
-
+    switch (action.type) {
+        case RECEIVE_DECKS:
+            return {
+                ...action.decks
+            }
+        case CREATE_DECK:
             return {
                 ...state,
-                [time]: {
-                    id: time,
-                    name: action.deckName,
-                    createTime: time,
-                    questions: []
-                }
+                [action.deck.id]: action.deck
             }
         default:
             return state;

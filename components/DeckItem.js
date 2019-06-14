@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
-import FontAwesomeIcon from '@fortawesome/react-native-fontawesome';
-import { faQuestion } from '@fortawesome/free-solid-svg-icons'
+import { connect } from 'react-redux';
 import style from 'styled-components';
 
 const DeckItemView = style.View`
@@ -27,20 +26,28 @@ const InnerViewIcon = style.View`
 	align-items: flex-end;    
 `;
 
-const DeckItem = props => (
-    <TouchableOpacity onPress={() => props.pressItem(props.item)}>
-        <DeckItemView>
-            <DeckItemInnerView>
-                <InnerView>
-                    <Text>{props.item.name}</Text>
-                    <Text>Total Questions: {props.item.questions.length}</Text>
-                </InnerView>
-                <InnerViewIcon>
-                    <FontAwesomeIcon icon={faQuestion} />
-                </InnerViewIcon>
-            </DeckItemInnerView>
-        </DeckItemView>
-    </TouchableOpacity>
-);
+const DeckItem = props => {
+    const {questions, item} = props;
+    const totalQuestions = questions[item.id] ? questions[item.id].length : 0;
+    return (
+        <TouchableOpacity onPress={() => props.pressItem(item)}>
+            <DeckItemView>
+                <DeckItemInnerView>
+                    <InnerView>
+                        <Text>{item.name}</Text>
+                        <Text>Total Questions: {totalQuestions}</Text>
+                    </InnerView>
+                    <InnerViewIcon>
 
-export default DeckItem;
+                    </InnerViewIcon>
+                </DeckItemInnerView>
+            </DeckItemView>
+        </TouchableOpacity>
+    )
+};
+
+const mapStateToProps = ({ questions }) => ({
+    questions
+});
+
+export default connect(mapStateToProps)(DeckItem);

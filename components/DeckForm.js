@@ -5,8 +5,6 @@ import { connect } from 'react-redux';
 import { createDeck } from '../actions/decks';
 
 const ViewCentered = styled.View`
-    flex: 1;
-    justify-content: center;
     padding: 15px;
 `;
 const TextInputDeck = styled.TextInput`
@@ -43,6 +41,7 @@ class DeckForm extends Component {
 
     saveDeck() {
         this.props.onCreateDeck(this.state.deckName);
+        this.setState({ deckName: '' });
         this.props.navigation.goBack();
     }
 
