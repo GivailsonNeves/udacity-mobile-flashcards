@@ -10,8 +10,7 @@ export const listDecks = () => new Promise((resolve) => {
         );
 });
 
-export const addDeck = (deck) => {
-    console.log(deck)
+export const addDeck = (deck) => {    
     AsyncStorage.getItem('decks')
         .then(decks => {
             let currentDecks = JSON.parse(decks);
@@ -23,11 +22,14 @@ export const addDeck = (deck) => {
         });
 }
 
-export const addQuestion = (question) => {
-    AsyncStorage.getItem('questions')
-        .then(questions => {
-            let currentQuestions = JSON.parse(questions);
-            let newQuestions = currentQuestions[question.id] = question;
-            AsyncStorage.setItem('questions', JSON.stringify(newQuestions));
+export const addCard = (card) => {
+    AsyncStorage.getItem('cards')
+        .then(cards => {
+            let currentCards = JSON.parse(cards);
+            let newCards = {
+                ...currentCards,
+                [card.idDeck]: card
+            };
+            AsyncStorage.setItem('cards', JSON.stringify(newCards));
         })
 }

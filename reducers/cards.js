@@ -1,9 +1,9 @@
 
-const questions = (state = {}, action) => {
+const cards = (state = {}, action) => {
     switch(action.type)  {
         default:
             return state;
     }
 }
 
-export default questions;
+export default cards;

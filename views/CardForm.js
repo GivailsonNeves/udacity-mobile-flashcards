@@ -28,7 +28,8 @@ class CardForm extends Component {
     }
 
     saveCard () {
-
+        const deck = this.props.navigation.state.params;
+        this.props.onCreateQuestion(this.state, deck.id)
     }
 
     render() {
@@ -59,4 +60,12 @@ class CardForm extends Component {
     }
 }
 
-export default connect()(CardForm);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onCreateQuestion: (state, idDeck) => {
+            dispatch(createCard({...state, idDeck}));
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(CardForm);
