@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Text, KeyboardAvoidingView } from 'react-native';
+import { KeyboardAvoidingView } from 'react-native';
+import FormatedInput from './shared/Inputs';
 import { connect } from 'react-redux';
 import { createDeck } from '../actions/decks';
 
 const ViewCentered = styled.View`
     padding: 15px;
-`;
-const TextInputDeck = styled.TextInput`
-    border: 1px #ccc solid;
-    width: 100%;
-    padding: 8px 5px;
-    margin: 5px 0;
 `;
 
 const PrimaryButton = styled.TouchableOpacity``;
@@ -49,10 +44,11 @@ class DeckForm extends Component {
         return (
             <ViewCentered>
                 <KeyboardAvoidingView behavior="padding" enabled>
-                    <Text>Name your new deck:</Text>
-                    <TextInputDeck
-                        onChangeText={text => this.handleChangeText(text)}
-                        value={this.state.deckName} />
+                    <FormatedInput
+                        value={this.state.deckName}
+                        title="Name your new deck:"
+                        onChangeText={ this.handleChangeText }
+                    />                    
                     <PrimaryButton>
                         <PrimaryButtonText onPress={() => this.saveDeck()}>Enviar</PrimaryButtonText>
                     </PrimaryButton>

@@ -10,6 +10,7 @@ import style from 'styled-components';
 import reducers from './reducers';
 import { createStore } from 'redux';
 import { handleInitialData } from './actions/loading';
+import CardForm from './views/CardForm';
 
 const MainView = style.View`
   flex: 1;
@@ -31,6 +32,9 @@ const Stack = createStackNavigator({
   },
   Deck: {
     screen: Deck,
+  },
+  CardForm: {
+    screen: CardForm,
   }
 });
 
