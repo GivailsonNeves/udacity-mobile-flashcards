@@ -5,6 +5,7 @@ import ask from '../assets/ask.jpg';
 import { PrimaryButton } from '../components/shared/Buttons';
 import FormatedInput from '../components/shared/Inputs';
 import { connect } from 'react-redux';
+import { createCard } from '../actions/cards';
 
 const CardFormView = styled.View`
     flex: 1;
@@ -22,14 +23,15 @@ class CardForm extends Component {
         answer: ''
     }
 
-    constructor (props) {
+    constructor(props) {
         super(props);
         this.saveCard = this.saveCard.bind(this);
     }
 
-    saveCard () {
+    saveCard() {
         const deck = this.props.navigation.state.params;
-        this.props.onCreateQuestion(this.state, deck.id)
+        this.props.onCreateQuestion(this.state, deck.id);
+        this.props.navigation.goBack();
     }
 
     render() {
@@ -53,7 +55,7 @@ class CardForm extends Component {
                     </CardFormViewInner>
                 </View>
                 <CardFormViewInner>
-                    <PrimaryButton onPress={ this.saveCard } text="submit" />
+                    <PrimaryButton onPress={this.saveCard} text="submit" />
                 </CardFormViewInner>
             </CardFormView>
         );
@@ -63,7 +65,7 @@ class CardForm extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         onCreateQuestion: (state, idDeck) => {
-            dispatch(createCard({...state, idDeck}));
+            dispatch(createCard({ ...state, idDeck }));
         }
     }
 }

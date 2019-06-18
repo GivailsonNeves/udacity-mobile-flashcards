@@ -27,15 +27,15 @@ const InnerViewIcon = style.View`
 `;
 
 const DeckItem = props => {
-    const {questions, item} = props;
-    const totalQuestions = questions[item.id] ? questions[item.id].length : 0;
+    const {cards, item} = props;
+    const totalCards = cards[item.id] && cards[item.id].cards ? cards[item.id].cards.length : 0;
     return (
         <TouchableOpacity onPress={() => props.pressItem(item)}>
             <DeckItemView>
                 <DeckItemInnerView>
                     <InnerView>
                         <Text>{item.name}</Text>
-                        <Text>Total Questions: {totalQuestions}</Text>
+                        <Text>Total cards: {totalCards}</Text>
                     </InnerView>
                     <InnerViewIcon>
 
@@ -46,8 +46,8 @@ const DeckItem = props => {
     )
 };
 
-const mapStateToProps = ({ questions }) => ({
-    questions
+const mapStateToProps = ({ cards }) => ({
+    cards
 });
 
 export default connect(mapStateToProps)(DeckItem);

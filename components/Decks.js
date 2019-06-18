@@ -27,7 +27,7 @@ class Decks extends Component {
 
         const { decks } = this.props;
         const decksIds = Object.keys(decks);
-        const decksList = !!decksIds.length ? decksIds.map(i => decks[i]).sort( (a, b) => b - a ) : [];
+        const decksList = !!decksIds.length ? decksIds.map(i => decks[i]).sort( (a, b) => b.createTime - a.createTime ) : [];
         
         return (
             <View>

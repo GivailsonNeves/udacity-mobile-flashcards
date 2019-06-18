@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-import { View, StatusBar, Text } from 'react-native';
+import { View, StatusBar, Text, ToolbarAndroid } from 'react-native';
 import Constants from 'expo-constants';
 import { Provider, connect } from 'react-redux'
 import { purple } from './utils/colors';
@@ -11,17 +11,20 @@ import reducers from './reducers';
 import { createStore } from 'redux';
 import { handleInitialData } from './actions/loading';
 import CardForm from './views/CardForm';
+import CardAnswer from './views/CardAnswer';
+import middleware from './middleware';
 
 const MainView = style.View`
   flex: 1;
 `;
 
-const store = createStore(reducers);
+const store = createStore(reducers, middleware);
 
 const AppStatusBar = ({ backgroundColor, ...props }) => {
   return (
     <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
       <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+      <ToolbarAndroid title="AwesomeApp" />
     </View>
   );
 }
@@ -29,13 +32,24 @@ const AppStatusBar = ({ backgroundColor, ...props }) => {
 const Stack = createStackNavigator({
   Home: {
     screen: Home,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Decks',
+      headerStyle: { backgroundColor: 'blue' },
+      headerTintColor: 'white'
+    }),
   },
   Deck: {
     screen: Deck,
   },
   CardForm: {
     screen: CardForm,
+  },
+  CardAnswer: {
+    screen: CardAnswer
   }
+}, {
+  mode: 'modal',
+  headerMode: 'float',
 });
 
 const AppContainer = createAppContainer(Stack);

@@ -13,12 +13,18 @@ export const receiveDecks = (decks) => ({
 export const createDeck = (deckName) => {
     const time = getTime();
     const deck = {
-        id: time,
+        id: `${time}`,
         name: deckName,
         createTime: time
     }
-    addDeck(deck);
-    return _createDeck(deck)
+
+    return (dispatch) => {
+        addDeck(deck)
+            .then(
+                _ => dispatch(_createDeck(deck))
+            )
+
+    }
 };
 
 const _createDeck = (deck) => ({

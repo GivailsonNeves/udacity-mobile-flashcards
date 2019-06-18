@@ -23,8 +23,8 @@ const DeckTitleText = styled.Text`
 class Deck extends Component {
     render() {
         const deck = this.props.navigation.state.params;
-        const { questions } = this.props;
-        const listQuestions = (!!questions && questions[deck.id]) ? questions[deck.id] : [];
+        const { cards } = this.props;
+        const totalCards = (cards[deck.id] && cards[deck.id].cards) ? cards[deck.id].cards.length : 0;
         
         return (
             <DeckView>
@@ -33,12 +33,12 @@ class Deck extends Component {
                     <Image style={{ height: 200, width: null }} source={questionMark} />
                     <DeckInfo>
                         <DeckTitleText>{ deck.name }</DeckTitleText>
-                        <DeckTitleText style={{ fontSize: 14 }}>Total cards: { listQuestions.length }</DeckTitleText>
+                        <DeckTitleText style={{ fontSize: 14 }}>Total cards: { totalCards }</DeckTitleText>
                     </DeckInfo>
                 </View>
                 <View style={{ padding: 15 }}>
                     <PrimaryButton onPress={() => this.props.navigation.navigate('CardForm', deck) } text="add card" />
-                    <PrimaryButton text="start quiz" />
+                    <PrimaryButton disabled={totalCards == 0} onPress={() => this.props.navigation.navigate('CardAnswer', deck) } text="start quiz" />
                     <DangerButton text="remove deck" />
                 </View>
             </DeckView>
@@ -46,8 +46,8 @@ class Deck extends Component {
     }
 }
 
-const mapStateToProps = ({questions}) => ({
-    questions
+const mapStateToProps = ({cards}) => ({
+    cards
 })
 
 export default connect(mapStateToProps)(Deck);

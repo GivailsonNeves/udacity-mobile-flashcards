@@ -4,20 +4,24 @@ import { getTime } from "../utils/helpers";
 export const RECEIVE_CARDS = 'RECEIVE_CARDS';
 export const CREATE_CARD = 'CREATE_CARD';
 
-export const RECEIVE_CARDS = (cards) => ({
+export const receiveCards = (cards) => ({
     type: RECEIVE_CARDS,
     cards
 });
 
 export const createCard = ({ question, answer, idDeck}) => {    
     const card = {
-        idDeck,
+        idDeck : `${idDeck}`,
         question,
         answer,
         createTime: getTime()
     };
-    addCard(card);
-    return _createCard(card);
+    return (dispatch) => {
+        addCard(card)
+            .then(
+                _ => dispatch(_createCard(card))
+            )
+    }
 }
 
 export const _createCard = (card) => ({

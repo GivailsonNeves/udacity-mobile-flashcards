@@ -35,7 +35,8 @@ class FormatedInput extends Component {
                 <Text>{this.props.title}</Text>
                 <CustomTextInput
                     onChangeText={text => this.handleChangeText(text)}
-                    value={this.state.value} />
+                    autoCapitalize="none"
+                    defaultValue={this.state.value} />
             </View>
         )
     }

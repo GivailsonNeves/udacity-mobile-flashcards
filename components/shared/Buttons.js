@@ -20,16 +20,16 @@ const DangerButtonText = styled.Text`
 `;
 
 export const PrimaryButton = props => (
-    <TouchableOpacity onPress={() => props.onPress && props.onPress()}>
-        <PrimaryButtonText>
+    <TouchableOpacity disabled={props.disabled} onPress={() => props.onPress && props.onPress()}>
+        <PrimaryButtonText style={{opacity : props.disabled ? .7 : 1}}>
             {props.text}
         </PrimaryButtonText>
     </TouchableOpacity>
 )
 
 export const DangerButton = props => (
-    <TouchableOpacity onPress={() => props.onPress && props.onPress()}>
-        <DangerButtonText>
+    <TouchableOpacity disabled={props.disabled} onPress={() => props.onPress && props.onPress()}>
+        <DangerButtonText style={{opacity : props.disabled ? .7 : 1}}>
             {props.text}
         </DangerButtonText>
     </TouchableOpacity>
