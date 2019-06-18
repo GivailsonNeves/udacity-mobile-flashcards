@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import { View, StatusBar, Text, ToolbarAndroid } from 'react-native';
-import Constants from 'expo-constants';
+import { Constants } from 'expo';
 import { Provider, connect } from 'react-redux'
 import { purple } from './utils/colors';
 import Home from './views/Home';

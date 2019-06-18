@@ -3,6 +3,7 @@ import { View, Image, Text } from 'react-native';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { PrimaryButton, DangerButton } from '../components/shared/Buttons';
+import FormatedInput from '../components/shared/Inputs';
 import questionMark from '../assets/question_mark.jpg';
 
 const CardInfo = styled.View`
@@ -15,9 +16,14 @@ const CardTitleText = styled.Text`
     color: white;
 `;
 
+const CardQuestionText = styled.Text`    
+    font-size: 20px;    
+`;
+
 class CardAnswer extends Component {
     state = {
         currentCard: 0,
+        answer: ''
     }
 
     render() {
@@ -39,7 +45,17 @@ class CardAnswer extends Component {
                 <View style={{padding: 15}}>
                     {
                         card && (
-                            <Text>{card.question}</Text>
+                            <View>
+                                <CardQuestionText>{card.question}</CardQuestionText>
+                                <FormatedInput
+                                    value={this.state.answer}
+                                    title="What's the answer?"
+                                    onChangeText={text => this.setState({ answer: text })}
+                                />
+                                <PrimaryButton>
+                                    Submit
+                                </PrimaryButton>
+                            </View>
                         )
                     }
                 </View>

@@ -26,7 +26,7 @@ class FormatedInput extends Component {
     handleChangeText (text) {
         this.setState({value: text});
         if (this.props.onChangeText)
-            this.props.onChangeText(this.state.value);
+            this.props.onChangeText(text);
     }
 
     render () {
