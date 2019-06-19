@@ -21,7 +21,8 @@ const PrimaryButtonText = styled.Text`
 class DeckForm extends Component {
 
     state = {
-        deckName: ''
+        deckName: '',
+        fieldChanged: false
     }
 
     constructor(props) {
@@ -36,7 +37,7 @@ class DeckForm extends Component {
 
     saveDeck() {
         this.props.onCreateDeck(this.state.deckName);
-        this.setState({ deckName: '' });
+        this.setState({ deckName: '', fieldChanged: !this.state.fieldChanged});
         this.props.navigation.goBack();
     }
 
@@ -45,6 +46,7 @@ class DeckForm extends Component {
             <ViewCentered>
                 <KeyboardAvoidingView behavior="padding" enabled>
                     <FormatedInput
+                        key={this.state.fieldChanged}
                         value={this.state.deckName}
                         title="Name your new deck:"
                         onChangeText={ this.handleChangeText }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import { View, StatusBar, Text, ToolbarAndroid } from 'react-native';
-import { Constants } from 'expo';
+import Constants from 'expo-constants';
 import { Provider, connect } from 'react-redux'
 import { purple } from './utils/colors';
 import Home from './views/Home';
@@ -13,6 +13,7 @@ import { handleInitialData } from './actions/loading';
 import CardForm from './views/CardForm';
 import CardAnswer from './views/CardAnswer';
 import middleware from './middleware';
+import { setLocalNotification } from './utils/helpers';
 
 const MainView = style.View`
   flex: 1;
@@ -84,10 +85,19 @@ const mapStateToProps = ({ loaded }) => (
 
 const AppConnected = connect(mapStateToProps)(AppMainView);
 
-const App = () => (
-  <Provider store={store}>
-    <AppConnected />
-  </Provider>
-);
+class App  extends Component {
+
+  componentDidMount () {
+    setLocalNotification();
+  }
+
+  render () {
+    return (
+      <Provider store={store}>
+        <AppConnected />
+      </Provider>
+    );
+  }
+}
 
 export default App;
